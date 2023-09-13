@@ -1,10 +1,13 @@
-function App() {
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Main from "./pages/Main"
 
+function App() {
   return (
-    <div className="container">
-      <h1>MERN STACK WORKSHOP</h1>
-      <button class="btn btn-primary">Bootstrap</button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
