@@ -1,4 +1,5 @@
 const slugify = require('slugify')
+const Blog = require('../model/blog')
 
 exports.create = (req, res) => {
     const {title, content, author} = req.body
@@ -12,7 +13,9 @@ exports.create = (req, res) => {
             return res.status(400).json({error: 'ไม่มีเนิ้อหาบทความ'})
             break;
     }
-    // res.json({
-    //     data: {title, content, author, slug},
-    // })
+    Blog.create({title, content, author, slug}).then((blog) => {
+        res.json(blog)
+    }).catch(
+        (e) => res.json({error: e})
+    )
 }
