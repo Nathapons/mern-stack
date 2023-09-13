@@ -1,6 +1,9 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 
 export default function FormComponent() {
+    const navigate = useNavigate()
     const [state, setState] = useState({
         title: '',
         content: '',
@@ -13,8 +16,14 @@ export default function FormComponent() {
         setState({...state, [name]: value})
     }
 
+    function submitForm(e) {
+        e.preventDefault();
+        console.table({title, content, author})
+        console.log(import.meta.env.VITE_API_URL)
+    }
+
     return (
-        <form className="form-group mt-5">
+        <form className="form-group mt-5" onSubmit={submitForm}>
             <div>
                 <label>ชื่อบทความ</label>
                 <input type="text" className="form-control" value={title} onChange={inputValue('title')} />
