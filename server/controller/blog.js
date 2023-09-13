@@ -2,8 +2,10 @@ const slugify = require('slugify')
 const Blog = require('../model/blog')
 
 exports.getBlogs = (req, res) => {
-    Blog.find({}).exec((err, blog) => {
-        res.json(blog).status(200)
+    Blog.find({}).then((blogs) => {
+        res.json(blogs)
+    }).catch((err) => {
+        res.json({error: err})
     })
 }
 
