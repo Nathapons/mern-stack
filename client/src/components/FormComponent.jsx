@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 
 export default function FormComponent() {
@@ -10,23 +11,32 @@ export default function FormComponent() {
         content: '',
         author: ''
     })
-    const {title, content, author} = state
-    
+    const { title, content, author } = state
+
     const inputValue = name => event => {
         const value = event.target.value
-        setState({...state, [name]: value})
+        setState({ ...state, [name]: value })
     }
 
     function submitForm(e) {
         e.preventDefault();
-        console.table({title, content, author})
+        console.table({ title, content, author })
         console.log(import.meta.env.VITE_API_URL)
-        axios.post(`${import.meta.env.VITE_API_URL}/blog`, {title, content, author}).then(res => {
-            console.log("Record Complete")
-            navigate('/')
+        axios.post(`${import.meta.env.VITE_API_URL}/blog`, { title, content, author }).then(res => {
+            Swal.fire(
+                'สำเร็จ',
+                'บันทึกข้อมูลบทความเรียบร้อย',
+                'success'
+            ).then(() => {
+                setState({...state, title: '', content: '', author: ''})
+                navigate('/')
+            })
         }).catch(err => {
-            console.log('Record Incomplete')
-            alert(err.response)
+            Swal.fire(
+                'แจ้งเตือน',
+                err.response.data.error,
+                'error'
+            )
         })
     }
 
