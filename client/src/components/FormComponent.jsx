@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import axios from 'axios'
 
 
 export default function FormComponent() {
@@ -20,6 +21,13 @@ export default function FormComponent() {
         e.preventDefault();
         console.table({title, content, author})
         console.log(import.meta.env.VITE_API_URL)
+        axios.post(`${import.meta.env.VITE_API_URL}/blog`, {title, content, author}).then(res => {
+            console.log("Record Complete")
+            navigate('/')
+        }).catch(err => {
+            console.log('Record Incomplete')
+            alert(err.response)
+        })
     }
 
     return (
