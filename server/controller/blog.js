@@ -1,7 +1,13 @@
 const slugify = require('slugify')
 const Blog = require('../model/blog')
 
-exports.create = (req, res) => {
+exports.getBlogs = (req, res) => {
+    Blog.find({}).exec((err, blog) => {
+        res.json(blog).status(200)
+    })
+}
+
+exports.createBlog = (req, res) => {
     const {title, content, author} = req.body
     const slug = slugify(title);
 
@@ -14,7 +20,7 @@ exports.create = (req, res) => {
             break;
     }
     Blog.create({title, content, author, slug}).then((blog) => {
-        res.json(blog)
+        res.json(blog).status(201)
     }).catch(
         (e) => res.json({error: e})
     )
