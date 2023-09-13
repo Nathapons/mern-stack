@@ -6,6 +6,16 @@ const dotenv = require('dotenv').config()
 
 const app = express()
 
+// Connect Cloud DB
+mongoose.connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: false
+}).then(
+    () => console.log('Connect Database completely')
+).catch(
+    (err) => console.log(err)
+)
+
 // Middleware
 app.use(express.json())
 app.use(cors())
