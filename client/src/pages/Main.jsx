@@ -23,7 +23,13 @@ export default function Main() {
 
     const deleteBlog = (slug) => {
         axios.delete(`${import.meta.env.VITE_API_URL}/blog/${slug}`).then(res => {
-            setBlog(res.data)
+            Swal.fire(
+                'Delete Success!',
+                'ลบข้อมูลเรียบร้อยแล้ว',
+                'success'
+            ).then(
+                setBlog(res.data)
+            )
         }).catch((err) => {
             Swal.fire(
                 'Get Data error',
