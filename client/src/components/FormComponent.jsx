@@ -1,10 +1,11 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
 
 export default function FormComponent() {
+    const { id } = useParams()
     const navigate = useNavigate()
     const [state, setState] = useState({
         title: '',
@@ -17,6 +18,12 @@ export default function FormComponent() {
         const value = event.target.value
         setState({ ...state, [name]: value })
     }
+
+    useEffect(() => {
+        axios.get(`${import.meta.env.VITE_API_URL}/blog/${id}`).then((res) => {
+            setState({...res.data})
+        })
+    }, [])
 
     function submitForm(e) {
         e.preventDefault();

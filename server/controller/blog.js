@@ -1,5 +1,6 @@
 const slugify = require('slugify')
 const Blog = require('../model/blog')
+const { v4: uuidv4 } = require('uuid');
 
 exports.getBlogs = (req, res) => {
     Blog.find({}).then((blogs) => {
@@ -22,6 +23,10 @@ exports.createBlog = (req, res) => {
     const {title, content, author} = req.body
     const slug = slugify(title);
 
+    if (!slug) {
+        slug = uuidv4()
+    }
+
     switch (true) {
         case !title:
             return res.status(400).json({error: 'ไม่มีชื่อบทความ'})
@@ -32,6 +37,19 @@ exports.createBlog = (req, res) => {
     }
     Blog.create({title, content, author, slug}).then((blog) => {
         res.json(blog).status(201)
+    }).catch(
+        (e) => res.json({error: e})
+    )
+}
+
+exports.deleteBlog = (req, res) => {
+    const { slug } = req.params
+    Blog.deleteOne({slug}).then(() => {
+        Blog.find({}).then((blogs) => {
+            res.json(blogs)
+        }).catch(
+            (e) => res.json({error: e})
+        )
     }).catch(
         (e) => res.json({error: e})
     )
