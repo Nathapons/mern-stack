@@ -1,14 +1,16 @@
 export default function Navbar() {
     return (
-        <nav>
-            <ul className="nav nav-tabs">
-                <li className="nav-item pr-3 pt-3 pb-3">
-                    <a href="/" className="nav-link">หน้าแรก</a>
-                </li>
-                <li className="nav-item pr-3 pt-3 pb-3">
-                    <a href="/form" className="nav-link">เขียนบทความ</a>
-                </li>
-            </ul>
+        <nav class="navbar navbar-expand-lg bg-primary text-light">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/">รายละเอียดบทความ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/form">เขียนบทความ</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
     )
 }

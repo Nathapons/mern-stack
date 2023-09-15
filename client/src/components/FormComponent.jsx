@@ -41,7 +41,7 @@ export default function FormComponent() {
     }
 
     return (
-        <form className="form-group mt-5" onSubmit={submitForm}>
+        <form className="form-group mt-3" onSubmit={submitForm}>
             <div>
                 <label>ชื่อบทความ</label>
                 <input type="text" className="form-control" value={title} onChange={inputValue('title')} />
