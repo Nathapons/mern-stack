@@ -9,6 +9,15 @@ exports.getBlogs = (req, res) => {
     })
 }
 
+exports.singleBlog = (req, res) => {
+    const { slug } = req.params
+    Blog.findOne({slug}).then((blog) => {
+        res.json(blog)
+    }).catch((err) => {
+        res.json({error: err})
+    })
+}
+
 exports.createBlog = (req, res) => {
     const {title, content, author} = req.body
     const slug = slugify(title);
