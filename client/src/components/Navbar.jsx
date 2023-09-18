@@ -7,7 +7,7 @@ export default function Navbar() {
                         <a class="nav-link text-light" href="/">รายละเอียดบทความ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="/form">เขียนบทความ</a>
+                        <a class="nav-link text-light" href="/form/">เขียนบทความ</a>
                     </li>
                 </ul>
             </div>
