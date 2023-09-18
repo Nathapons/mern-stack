@@ -51,7 +51,13 @@ export default function Main() {
         })
     }
 
-    useEffect(() => {fetchData()}, [])
+    
+
+    useEffect(() => {
+
+        
+        fetchData()
+    }, [])
 
     return (
         <div>
