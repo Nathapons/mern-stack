@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css';
 
 
 export default function FormComponent() {
@@ -9,20 +11,25 @@ export default function FormComponent() {
     const navigate = useNavigate()
     const [state, setState] = useState({
         title: '',
-        content: '',
         author: ''
     })
-    const { title, content, author } = state
+    const [content, setContent] = useState('')
+
+    const { title, author } = state
 
     const inputValue = name => event => {
         const value = event.target.value
         setState({ ...state, [name]: value })
+    }
+    const submitContent = (event) => {
+        setContent(event)
     }
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/blog/${id}`).then((res) => {
             console.log(res.data)
             setState({...res.data})
+            setContent(res.data.content)
         })
     }, [])
 
@@ -35,7 +42,8 @@ export default function FormComponent() {
                     'บันทึกข้อมูลบทความเรียบร้อย',
                     'success'
                 ).then(() => {
-                    setState({...state, title: '', content: '', author: ''})
+                    setState({...state, title: '', author: ''})
+                    setContent('')
                     navigate('/')
                 })
             }).catch(err => {
@@ -73,7 +81,14 @@ export default function FormComponent() {
             </div>
             <div className="mt-3">
                 <label>รายละเอียดบทความ</label>
-                <textarea className="form-control" value={content} onChange={inputValue('content')}></textarea>
+                {/* <textarea className="form-control" value={content} onChange={inputValue('content')}></textarea> */}
+                <ReactQuill 
+                    value={content}
+                    onChange={submitContent}
+                    theme="snow"
+                    className="pb-2"
+                    placeholder="เขียนรายละเอียดบทความของคุณ"
+                />
             </div>
             <div className="mt-3">
                 <label>ชื่อผู้แต่ง</label>
