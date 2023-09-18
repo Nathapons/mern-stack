@@ -38,6 +38,16 @@ exports.createBlog = (req, res) => {
     )
 }
 
+exports.updateBlog = (req, res) => {
+    const { slug } = req.params
+    const { title, content, author} = req.body
+    Blog.findOneAndUpdate({slug}, {title, content, author}, {new: true}).then((blog) => {
+        res.json(blog)
+    }).catch(
+        (e) => res.json({error: e})
+    )
+}
+
 exports.deleteBlog = (req, res) => {
     const { slug } = req.params
     Blog.deleteOne({slug}).then(() => {
