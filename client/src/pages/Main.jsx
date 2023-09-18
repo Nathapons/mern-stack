@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function Main() {
+    const navigate = useNavigate()
     const [blogs, setBlog] = useState([])
 
     const fetchData = () => {
@@ -43,8 +44,8 @@ export default function Main() {
     return (
         <div>
             <Navbar />
-            <div className="container">
-                <h2 className="mt-2">รายการแสดงข้อมูลบทความ</h2>
+            <div className="container" style={{marginTop: "20px"}}>
+                <h2>รายการแสดงข้อมูลบทความ</h2>
                 <table className="table table-striped mt-2">
                     <thead className="thread-dark">
                         <tr>
@@ -66,6 +67,7 @@ export default function Main() {
                                 <td>{blog.author}</td>
                                 <td>{new Date(blog.createdAt).toLocaleString()}</td>
                                 <td>
+                                    <button className="btn btn-warning mx-2" onClick={(e) => navigate(`/blog/${blog.slug}`)}>Edit</button>
                                     <button className="btn btn-danger mx-2" onClick={(e) => deleteBlog(blog.slug)}>Delete</button>
                                 </td>
                             </tr>
