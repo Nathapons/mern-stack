@@ -21,11 +21,7 @@ exports.singleBlog = (req, res) => {
 
 exports.createBlog = (req, res) => {
     const {title, content, author} = req.body
-    const slug = slugify(title);
-
-    if (!slug) {
-        slug = uuidv4()
-    }
+    const slug = uuidv4();
 
     switch (true) {
         case !title:

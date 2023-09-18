@@ -27,8 +27,6 @@ export default function FormComponent() {
 
     function submitForm(e) {
         e.preventDefault();
-        console.table({ title, content, author })
-        console.log(import.meta.env.VITE_API_URL)
         axios.post(`${import.meta.env.VITE_API_URL}/blog`, { title, content, author }).then(res => {
             Swal.fire(
                 'สำเร็จ',
