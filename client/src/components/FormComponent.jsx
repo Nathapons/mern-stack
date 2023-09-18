@@ -21,6 +21,7 @@ export default function FormComponent() {
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/blog/${id}`).then((res) => {
+            console.log(res.data)
             setState({...res.data})
         })
     }, [])
@@ -51,7 +52,6 @@ export default function FormComponent() {
                     'บันทึกข้อมูลบทความเรียบร้อย',
                     'success'
                 ).then(() => {
-                    setState({...state, title: '', content: '', author: ''})
                     navigate('/')
                 })
             }).catch(err => {
