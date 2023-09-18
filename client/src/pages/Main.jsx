@@ -22,20 +22,32 @@ export default function Main() {
     }
 
     const deleteBlog = (slug) => {
-        axios.delete(`${import.meta.env.VITE_API_URL}/blog/${slug}`).then(res => {
-            Swal.fire(
-                'Delete Success!',
-                'ลบข้อมูลเรียบร้อยแล้ว',
-                'success'
-            ).then(
-                setBlog(res.data)
-            )
-        }).catch((err) => {
-            Swal.fire(
-                'Get Data error',
-                err.response.data,
-                'error'
-            )
+        Swal.fire({
+            title: 'แจ้งเตือน',
+            text: 'Do you want to delete?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`${import.meta.env.VITE_API_URL}/blog/${slug}`).then(res => {
+                    Swal.fire(
+                        'Delete Success!',
+                        'ลบบทความเรียบร้อยแล้ว',
+                        'success'
+                    ).then(
+                        setBlog(res.data)
+                    )
+                }).catch((err) => {
+                    Swal.fire(
+                        'Get Data error',
+                        err.response.data,
+                        'error'
+                    )
+                })
+            }
         })
     }
 
