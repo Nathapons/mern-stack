@@ -81,7 +81,6 @@ export default function FormComponent() {
             </div>
             <div className="mt-3">
                 <label>รายละเอียดบทความ</label>
-                {/* <textarea className="form-control" value={content} onChange={inputValue('content')}></textarea> */}
                 <ReactQuill 
                     value={content}
                     onChange={submitContent}
@@ -94,7 +93,7 @@ export default function FormComponent() {
                 <label>ชื่อผู้แต่ง</label>
                 <input type="text" className="form-control" value={author} onChange={inputValue('author')} />
             </div>
-            <input type="submit" value="Record" className="btn btn-primary mt-3" />
+            <input type="submit" value={id? "Update": "Record"} className="btn btn-primary mt-3" />
         </form>
     )
 }
