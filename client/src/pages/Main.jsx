@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Link, useNavigate } from "react-router-dom";
-
+import parse from 'html-react-parser'
 
 export default function Main() {
     const navigate = useNavigate()
@@ -75,7 +75,7 @@ export default function Main() {
                             <tr key={index}>
                                 <td>{index+1}</td>
                                 <td><Link to={`/blog/${blog.slug}`}>{blog.title}</Link></td>
-                                <td>{blog.content.substring(0, 10)}</td>
+                                <td>{parse(blog.content.substring(0, 10))}</td>
                                 <td>{blog.author}</td>
                                 <td>{new Date(blog.createdAt).toLocaleString()}</td>
                                 <td>
