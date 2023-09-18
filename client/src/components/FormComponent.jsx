@@ -27,22 +27,42 @@ export default function FormComponent() {
 
     function submitForm(e) {
         e.preventDefault();
-        axios.post(`${import.meta.env.VITE_API_URL}/blog`, { title, content, author }).then(res => {
-            Swal.fire(
-                'สำเร็จ',
-                'บันทึกข้อมูลบทความเรียบร้อย',
-                'success'
-            ).then(() => {
-                setState({...state, title: '', content: '', author: ''})
-                navigate('/')
+        if (!id) {
+            axios.post(`${import.meta.env.VITE_API_URL}/blog`, { title, content, author }).then(res => {
+                Swal.fire(
+                    'สำเร็จ',
+                    'บันทึกข้อมูลบทความเรียบร้อย',
+                    'success'
+                ).then(() => {
+                    setState({...state, title: '', content: '', author: ''})
+                    navigate('/')
+                })
+            }).catch(err => {
+                Swal.fire(
+                    'แจ้งเตือน',
+                    err.response.data.error,
+                    'error'
+                )
             })
-        }).catch(err => {
-            Swal.fire(
-                'แจ้งเตือน',
-                err.response.data.error,
-                'error'
-            )
-        })
+        } else {
+            axios.put(`${import.meta.env.VITE_API_URL}/blog/${id}`, { title, content, author }).then(res => {
+                Swal.fire(
+                    'สำเร็จ',
+                    'บันทึกข้อมูลบทความเรียบร้อย',
+                    'success'
+                ).then(() => {
+                    setState({...state, title: '', content: '', author: ''})
+                    navigate('/')
+                })
+            }).catch(err => {
+                Swal.fire(
+                    'แจ้งเตือน',
+                    err.response.data.error,
+                    'error'
+                )
+            })
+        }
+        
     }
 
     return (
