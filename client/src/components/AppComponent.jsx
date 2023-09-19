@@ -7,12 +7,11 @@ const AppComponent = (props) => {
 
     useEffect(() => {
         const token = sessionStorage.getItem('token')
-        console.log(token)
-        // if (token) {
-        //   navigate('/')
-        // } else {
-        //   navigate('/login')
-        // }
+        if (token) {
+          navigate('/main')
+        } else {
+          navigate('/')
+        }
       }, [])
 
       return (
