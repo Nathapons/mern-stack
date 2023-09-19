@@ -1,15 +1,18 @@
+import { useEffect } from 'react'
 import {useNavigate} from 'react-router-dom'
+import Navbar from './Navbar'
 
 const AppComponent = (props) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const token = localStorage.getItem('access_token')
-        if (token) {
-          navigate('/')
-        } else {
-          navigate('/login')
-        }
+        const token = sessionStorage.getItem('token')
+        console.log(token)
+        // if (token) {
+        //   navigate('/')
+        // } else {
+        //   navigate('/login')
+        // }
       }, [])
 
       return (

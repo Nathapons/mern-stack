@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Link, useNavigate } from "react-router-dom";
 import parse from 'html-react-parser'
 
 export default function Main() {
+    console.log('Main')
     const navigate = useNavigate()
     const [blogs, setBlog] = useState([])
 
@@ -51,17 +51,12 @@ export default function Main() {
         })
     }
 
-    
-
     useEffect(() => {
-
-        
         fetchData()
     }, [])
 
     return (
         <div>
-            <Navbar />
             <div className="container" style={{marginTop: "20px"}}>
                 <h2>รายการแสดงข้อมูลบทความ</h2>
                 <table className="table table-striped mt-2">

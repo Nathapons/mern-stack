@@ -44,7 +44,7 @@ export default function FormComponent() {
                 ).then(() => {
                     setState({...state, title: '', author: ''})
                     setContent('')
-                    navigate('/')
+                    navigate('/main')
                 })
             }).catch(err => {
                 Swal.fire(

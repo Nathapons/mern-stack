@@ -1,8 +1,11 @@
 import { useState } from "react"
 import axios from 'axios'
 import Swal from "sweetalert2"
+import { authenticate } from "../../service/authorize"
+import { useNavigate } from "react-router-dom"
 
-export default function LoginComponent() {
+function LoginComponent(props) {
+    const navigate = useNavigate()
     const [login, setLogin] = useState({
         username: '',
         password: ''
@@ -16,7 +19,8 @@ export default function LoginComponent() {
     const submitForm = (e) => {
         e.preventDefault();
         axios.post(`${import.meta.env.VITE_API_URL}/login`, {username, password}).then((res) => {
-            console.log(res.data)
+            sessionStorage.setItem("token", JSON.stringify(res.data.token))
+            navigate('/main')
         }).catch(err => {
             Swal.fire(
                 'แจ้งเตือนผู้ใช้',
@@ -51,3 +55,5 @@ export default function LoginComponent() {
         </form>
     )
 }
+
+export default LoginComponent
