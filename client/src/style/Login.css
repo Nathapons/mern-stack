@@ -1,0 +1,17 @@
+body {
+    margin: 0 auto;
+}
+
+.container {
+    margin: 30% auto;
+    display: block;
+    width:500px;
+    border: 1px solid gray;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+label {
+    text-align: left;
+}

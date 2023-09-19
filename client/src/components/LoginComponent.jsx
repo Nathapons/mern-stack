@@ -37,7 +37,7 @@ export default function LoginComponent() {
                     onChange={inputValue('password')}
                 />
             </div>
-            <button type="submit" className="btn btn-primary mt-3">Submit</button>
+            <button type="submit" className="btn btn-primary mt-3">เข้าสู่ระบบ</button>
         </form>
     )
 }
