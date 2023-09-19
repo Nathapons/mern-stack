@@ -1,7 +1,6 @@
 import { useState } from "react"
 import axios from 'axios'
 import Swal from "sweetalert2"
-import { authenticate } from "../../service/authorize"
 import { useNavigate } from "react-router-dom"
 
 function LoginComponent(props) {
