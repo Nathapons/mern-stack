@@ -1,4 +1,6 @@
 import { useState } from "react"
+import axios from 'axios'
+import Swal from "sweetalert2"
 
 export default function LoginComponent() {
     const [login, setLogin] = useState({
@@ -13,7 +15,15 @@ export default function LoginComponent() {
 
     const submitForm = (e) => {
         e.preventDefault();
-        console.table({username, password})
+        axios.post(`${import.meta.env.VITE_API_URL}/login`, {username, password}).then((res) => {
+            console.log(res.data)
+        }).catch(err => {
+            Swal.fire(
+                'แจ้งเตือนผู้ใช้',
+                err.response.data.error,
+                'error'
+            )
+        })
     }
 
     return (
